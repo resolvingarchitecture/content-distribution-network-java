@@ -32,8 +32,6 @@ public class ContentDistributionNetworkService extends BaseService {
     private Delivery delivery;
     private Search search;
 
-    protected Properties config;
-
     public ContentDistributionNetworkService(MessageProducer producer, ServiceStatusListener listener) {
         super(producer, listener);
         distribution = new Distribution();
@@ -53,15 +51,30 @@ public class ContentDistributionNetworkService extends BaseService {
     }
 
     private void distribute(Envelope e) {
-        LOG.warning("Distribute not yet implemented.");
+        if(distribution.random(e)) {
+            // Return to bus
+            send(e);
+        } else {
+            deadLetter(e);
+        }
     }
 
     private void deliver(Envelope e) {
-        LOG.warning("Deliver not yet implemented.");
+        if(delivery.retrieveFromLocal(e)) {
+            // Return to bus
+            send(e);
+        } else {
+            deadLetter(e);
+        }
     }
 
     private void search(Envelope e) {
-        LOG.warning("Search not yet implemented.");
+        if(search.searchLocal(e)) {
+            // Return to bus
+            send(e);
+        } else {
+            deadLetter(e);
+        }
     }
 
     @Override
