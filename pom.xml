@@ -5,11 +5,11 @@
 
     <groupId>resolvingarchitecture</groupId>
 	<artifactId>cdn</artifactId>
-	<version>1.0.0</version>
+	<version>0.0.1</version>
 
 	<packaging>jar</packaging>
 
-	<name>ra-mail-drop</name>
+	<name>ra-cdn</name>
 	<url>https://resolvingarchitecture.io</url>
 	<description>Resolving Architecture - Content Distribution Network Service</description>
 	<inceptionYear>2020</inceptionYear>
