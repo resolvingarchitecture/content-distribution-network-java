@@ -9,7 +9,7 @@ public class Distribution {
     private static final Logger LOG = Logger.getLogger(Distribution.class.getName());
 
     public boolean random(Envelope e) {
-        LOG.warning("Distribution not yet implemented.");
+        LOG.warning("Random Distribution not yet implemented in CDN.");
         return false;
     }
 

@@ -9,7 +9,7 @@ public class Delivery {
     private static final Logger LOG = Logger.getLogger(Delivery.class.getName());
 
     public boolean retrieveFromLocal(Envelope e) {
-        LOG.warning("Delivery not yet implemented.");
+        LOG.warning("Retrieve from Local Delivery not yet implemented in CDN.");
         return false;
     }
 

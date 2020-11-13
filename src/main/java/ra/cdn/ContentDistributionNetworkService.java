@@ -4,6 +4,7 @@ import ra.cdn.delivery.Delivery;
 import ra.cdn.distribution.Distribution;
 import ra.cdn.search.Search;
 import ra.common.Envelope;
+import ra.common.crypto.Hash;
 import ra.common.messaging.MessageProducer;
 import ra.common.route.Route;
 import ra.common.service.BaseService;
@@ -51,9 +52,18 @@ public class ContentDistributionNetworkService extends BaseService {
     }
 
     private void distribute(Envelope e) {
+        // TODO: determine if this is just a save from a remote distribute or a local call to distribute out
+
+        // A request to distribute out randomly
         if(distribution.random(e)) {
-            // Return to bus
+            // Return to bus signalling success
             send(e);
+            // Update Local Index
+            search.updateLocalIndex(e);
+            // Update Global Index
+            Envelope e2 = search.buildGlobalUpdateIndexRequest(e);
+            // Propagate index
+            send(e2);
         } else {
             deadLetter(e);
         }
