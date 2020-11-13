@@ -1,5 +1,8 @@
 package ra.cdn;
 
+import ra.cdn.delivery.Delivery;
+import ra.cdn.distribution.Distribution;
+import ra.cdn.search.Search;
 import ra.common.Envelope;
 import ra.common.messaging.MessageProducer;
 import ra.common.route.Route;
@@ -12,25 +15,30 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * Mail Drop as a service
+ * Content Distribution as a service (along with delivery
  */
 public class ContentDistributionNetworkService extends BaseService {
 
     private static final Logger LOG = Logger.getLogger(ContentDistributionNetworkService.class.getName());
 
     public static final String OPERATION_DISTRIBUTE = "DISTRIBUTE";
-    public static final String OPERATION_RETRIEVE = "RETRIEVE";
+    public static final String OPERATION_DELIVER = "DELIVER";
     public static final String OPERATION_SEARCH = "SEARCH";
-    public static final String OPERATION_STREAM_AUDIO = "STREAM_AUDIO";
-    public static final String OPERATION_STREAM_VIDEO = "STREAM_VIDEO";
 
     public static final String RA_CDN_CONFIG = "ra-cdn.config";
     public static final String RA_CDN_DIR = "ra.cdn.dir";
+
+    private Distribution distribution;
+    private Delivery delivery;
+    private Search search;
 
     protected Properties config;
 
     public ContentDistributionNetworkService(MessageProducer producer, ServiceStatusListener listener) {
         super(producer, listener);
+        distribution = new Distribution();
+        delivery = new Delivery();
+        search = new Search();
     }
 
     @Override
@@ -38,10 +46,8 @@ public class ContentDistributionNetworkService extends BaseService {
         Route r = envelope.getDynamicRoutingSlip().getCurrentRoute();
         switch(r.getOperation()) {
             case OPERATION_DISTRIBUTE: {distribute(envelope);break;}
-            case OPERATION_RETRIEVE: {retrieve(envelope);break;}
+            case OPERATION_DELIVER: {deliver(envelope);break;}
             case OPERATION_SEARCH: {search(envelope);break;}
-            case OPERATION_STREAM_AUDIO: {streamAudio(envelope);break;}
-            case OPERATION_STREAM_VIDEO: {streamVideo(envelope);break;}
             default: {deadLetter(envelope);break;}
         }
     }
@@ -50,27 +56,12 @@ public class ContentDistributionNetworkService extends BaseService {
         LOG.warning("Distribute not yet implemented.");
     }
 
-    private void retrieve(Envelope e) {
-        LOG.warning("Distribute not yet implemented.");
+    private void deliver(Envelope e) {
+        LOG.warning("Deliver not yet implemented.");
     }
 
     private void search(Envelope e) {
-        LOG.warning("Distribute not yet implemented.");
-    }
-
-    private void streamAudio(Envelope e) {
-        LOG.warning("Distribute not yet implemented.");
-    }
-
-    private void streamVideo(Envelope e) {
-        LOG.warning("Distribute not yet implemented.");
-    }
-
-    @Override
-    public boolean send(Envelope e) {
-        // Persist message into mail box
-
-        return true;
+        LOG.warning("Search not yet implemented.");
     }
 
     @Override
