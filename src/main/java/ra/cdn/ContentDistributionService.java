@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * Content Distribution as a service (along with delivery
+ * Content Distribution as a service (along with delivery and search)
  */
 public class ContentDistributionService extends BaseService {
 
