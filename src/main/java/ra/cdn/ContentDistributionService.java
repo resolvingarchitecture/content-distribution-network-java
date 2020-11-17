@@ -4,12 +4,11 @@ import ra.cdn.delivery.Delivery;
 import ra.cdn.distribution.Distribution;
 import ra.cdn.search.Search;
 import ra.common.Envelope;
-import ra.common.crypto.Hash;
 import ra.common.messaging.MessageProducer;
 import ra.common.route.Route;
 import ra.common.service.BaseService;
 import ra.common.service.ServiceStatus;
-import ra.common.service.ServiceStatusListener;
+import ra.common.service.ServiceStatusObserver;
 import ra.util.Config;
 
 import java.util.*;
@@ -18,9 +17,9 @@ import java.util.logging.Logger;
 /**
  * Content Distribution as a service (along with delivery
  */
-public class ContentDistributionNetworkService extends BaseService {
+public class ContentDistributionService extends BaseService {
 
-    private static final Logger LOG = Logger.getLogger(ContentDistributionNetworkService.class.getName());
+    private static final Logger LOG = Logger.getLogger(ContentDistributionService.class.getName());
 
     public static final String OPERATION_DISTRIBUTE = "DISTRIBUTE";
     public static final String OPERATION_DELIVER = "DELIVER";
@@ -33,8 +32,8 @@ public class ContentDistributionNetworkService extends BaseService {
     private Delivery delivery;
     private Search search;
 
-    public ContentDistributionNetworkService(MessageProducer producer, ServiceStatusListener listener) {
-        super(producer, listener);
+    public ContentDistributionService(MessageProducer producer, ServiceStatusObserver observer) {
+        super(producer, observer);
         distribution = new Distribution();
         delivery = new Delivery();
         search = new Search();

@@ -10,7 +10,7 @@ public class ContentDistributionNetworkServiceTest {
 
     private static final Logger LOG = Logger.getLogger(ContentDistributionNetworkServiceTest.class.getName());
 
-    private static ContentDistributionNetworkService service;
+    private static ContentDistributionService service;
     private static MockProducer producer;
     private static Properties props;
     private static boolean ready = false;
@@ -21,7 +21,7 @@ public class ContentDistributionNetworkServiceTest {
         props = new Properties();
 
         producer = new MockProducer();
-        service = new ContentDistributionNetworkService(producer, null);
+        service = new ContentDistributionService(producer, null);
 
         ready = service.start(props);
     }
